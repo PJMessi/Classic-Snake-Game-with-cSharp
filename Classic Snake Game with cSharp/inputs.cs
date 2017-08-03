@@ -14,7 +14,7 @@ namespace Classic_Snake_Game_with_cSharp
             {
                 return false;
             }
-            return (bool)keyTable[key];
+            return (bool) keyTable[key];
         }
 
         public static void changeState(Keys key, bool state)

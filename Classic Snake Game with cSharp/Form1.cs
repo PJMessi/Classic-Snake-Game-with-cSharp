@@ -46,7 +46,7 @@ namespace Classic_Snake_Game_with_cSharp
                 else if (inputs.keyPressed(Keys.Down) && settings.direction != Direction.up)
                     settings.direction = Direction.down;
 
-                MessageBox.Show("anisha");
+                //MessageBox.Show("anisha");
 
                 MovePlayer();
            
@@ -54,6 +54,16 @@ namespace Classic_Snake_Game_with_cSharp
             pbCanvas.Invalidate();
              
         }
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            inputs.changeState(e.KeyCode, true);
+        }
+
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+            inputs.changeState(e.KeyCode, false);
+        }
+   
 
         private void MovePlayer()
         {
@@ -143,6 +153,5 @@ namespace Classic_Snake_Game_with_cSharp
                 lblGameOver.Visible = true;
             }
         }
-
     }
 }

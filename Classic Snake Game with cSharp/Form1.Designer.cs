@@ -84,6 +84,8 @@
             this.Controls.Add(this.pbCanvas);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.pbCanvas)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
