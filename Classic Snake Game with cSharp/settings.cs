@@ -15,7 +15,7 @@ namespace Classic_Snake_Game_with_cSharp
         public static int score { get; set; }
         public static int points { get; set; }
         public static bool gameOver { get; set; }
-        public static Direction direction { get; set; }
+        public static Direction direction { get; set; }  
 
         public settings()
         {
@@ -26,6 +26,7 @@ namespace Classic_Snake_Game_with_cSharp
             score = 0;
             points = 100;
             direction = Direction.down;
+            
         }
     }
 }

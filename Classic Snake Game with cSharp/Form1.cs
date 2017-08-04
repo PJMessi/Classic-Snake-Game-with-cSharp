@@ -9,6 +9,7 @@ namespace Classic_Snake_Game_with_cSharp
     {
         private List<circle> Snake = new List<circle>();
         private circle food = new circle();
+       
 
         public Form1()
         {
@@ -24,7 +25,7 @@ namespace Classic_Snake_Game_with_cSharp
         {
             if (settings.gameOver)
             {
-
+               
                 if (inputs.keyPressed(Keys.Enter))
                 {
                     StartGame();
@@ -33,6 +34,9 @@ namespace Classic_Snake_Game_with_cSharp
 
             else
             {
+
+                int maxXPos = pbCanvas.Size.Width / settings.width;
+                int maxYPos = pbCanvas.Size.Height / settings.height;
 
                 if (inputs.keyPressed(Keys.Right) && settings.direction != Direction.left)
                 { settings.direction = Direction.right; }
@@ -46,6 +50,17 @@ namespace Classic_Snake_Game_with_cSharp
                 else if (inputs.keyPressed(Keys.Down) && settings.direction != Direction.up)
                     settings.direction = Direction.down;
 
+                if (Snake[0].X < 0 || Snake[0].Y < 0 || Snake[0].X >= maxXPos || Snake[0].Y >= maxYPos+1)
+                {
+                    settings.gameOver = true;                   
+                }
+
+                if(Snake[0].X==food.X&&Snake[0].Y==food.Y)
+                {
+                    eat();
+                }
+
+
                 //MessageBox.Show("anisha");
 
                 MovePlayer();
@@ -54,17 +69,7 @@ namespace Classic_Snake_Game_with_cSharp
             pbCanvas.Invalidate();
              
         }
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
-        {
-            inputs.changeState(e.KeyCode, true);
-        }
-
-        private void Form1_KeyUp(object sender, KeyEventArgs e)
-        {
-            inputs.changeState(e.KeyCode, false);
-        }
    
-
         private void MovePlayer()
         {
 
@@ -99,7 +104,6 @@ namespace Classic_Snake_Game_with_cSharp
             }
         }
 
-
         private void StartGame()
         {
             lblGameOver.Visible = false;
@@ -119,6 +123,15 @@ namespace Classic_Snake_Game_with_cSharp
             Random random = new Random();
             food = new circle { X = random.Next(0, maxXPos), Y = random.Next(0, maxYPos) };
         }
+
+        private void eat()
+        {
+            settings.score += settings.points;
+            lblScore.Text = settings.score.ToString();
+            Snake.Add(new circle { });
+            GenerateFood();
+        }
+
 
         private void pbCanvas_Paint(object sender, PaintEventArgs e)
         {
@@ -152,6 +165,16 @@ namespace Classic_Snake_Game_with_cSharp
                 lblGameOver.Text = gameOver;
                 lblGameOver.Visible = true;
             }
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            inputs.changeState(e.KeyCode, true);
+        }
+
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+            inputs.changeState(e.KeyCode, false);
         }
     }
 }
